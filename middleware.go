@@ -82,6 +82,8 @@ func (m *Middleware) completeAuth(w http.ResponseWriter, r *http.Request) error 
 		return resperr.WithCodeAndMessage(nil, http.StatusBadRequest, "State mismatch. Unable to complete authentication.")
 	}
 
+	// TODO: Now that the state has been verified, we should delete the cookie
+
 	// Exchange code for a token
 	// TODO: Should PKCE be used here?
 	token, err := m.Config.Exchange(r.Context(), r.FormValue("code"))
